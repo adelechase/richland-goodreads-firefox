@@ -1,0 +1,62 @@
+{
+  "manifest_version": 2,
+  "name": "Richland Library on Goodreads",
+  "version": "2.5.1",
+  "description": "Shows Richland Library physical holdings, live Libby availability, and independently searched Hoopla eBook/eAudiobook results on Goodreads.",
+  "permissions": [
+    "https://catalog.richlandlibrary.com/*",
+    "http://catalog.richlandlibrary.com/*",
+    "https://rlcpac/*",
+    "http://rlcpac/*",
+    "https://www.goodreads.com/*",
+    "storage",
+    "webRequest",
+    "cookies",
+    "https://myrl.overdrive.com/*",
+    "https://*.overdrive.com/*",
+    "https://www.hoopladigital.com/*",
+    "https://hoopladigital.com/*",
+    "tabs",
+    "tabHide",
+    "https://thunder.api.overdrive.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.goodreads.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_title": "Richland Library on Goodreads",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "icon48.png",
+    "96": "icon96.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "richland-goodreads@local",
+      "strict_min_version": "140.0",
+      "update_url": "https://raw.githubusercontent.com/adelechase/richland-goodreads-firefox/main/updates.json",
+      "data_collection_permissions": {
+        "required": [
+          "websiteContent"
+        ]
+      }
+    }
+  }
+}
