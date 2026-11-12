@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "release-assets/richland-goodreads-firefox-v2.5.1-signed.xpi"
+      - "release-assets/READY-v2.5.1"
 
 permissions:
   contents: write
@@ -16,10 +16,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Reconstruct signed XPI
+        run: |
+          cat release-assets/base64/part* | base64 --decode > richland-goodreads-firefox-v2.5.1-signed.xpi
+          echo "6025d23a4c4dbd10fa7de645cbcd290e129928c792a65c8cfb6e70714ab4b34e  richland-goodreads-firefox-v2.5.1-signed.xpi" | sha256sum --check
+
       - name: Create release and upload signed XPI
         env:
           GH_TOKEN: ${{ github.token }}
-          ASSET: release-assets/richland-goodreads-firefox-v2.5.1-signed.xpi
+          ASSET: richland-goodreads-firefox-v2.5.1-signed.xpi
         run: |
           if gh release view v2.5.1 >/dev/null 2>&1; then
             gh release upload v2.5.1 "$ASSET" --clobber
