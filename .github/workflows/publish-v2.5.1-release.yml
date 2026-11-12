@@ -1,0 +1,30 @@
+name: Publish v2.5.1 signed release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "release-assets/richland-goodreads-firefox-v2.5.1-signed.xpi"
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Create release and upload signed XPI
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ASSET: release-assets/richland-goodreads-firefox-v2.5.1-signed.xpi
+        run: |
+          if gh release view v2.5.1 >/dev/null 2>&1; then
+            gh release upload v2.5.1 "$ASSET" --clobber
+          else
+            gh release create v2.5.1 "$ASSET" \
+              --title "Richland Library on Goodreads v2.5.1" \
+              --notes "Mozilla-signed Firefox XPI for self-hosted distribution."
+          fi
