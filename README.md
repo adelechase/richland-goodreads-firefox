@@ -71,3 +71,10 @@ Keep older update entries if you want Firefox to choose among versions based on 
 ## Important Hoopla note
 
 Hoopla's official library-specific Partner API requires credentials issued to library/vendor integrations. This extension does not embed those credentials or read your library card number. For library-specific Hoopla results, sign in to Hoopla in Firefox with the Richland Library account you normally use.
+
+
+## License
+
+This project is licensed under the [PolyForm Noncommercial License 1.0.0](LICENSE). You may use, modify, and redistribute the code for noncommercial purposes, including use by libraries, educational institutions, public research organizations, charitable organizations, and government institutions. Commercial use requires separate permission from the copyright holder.
+
+SPDX identifier: `PolyForm-Noncommercial-1.0.0`
