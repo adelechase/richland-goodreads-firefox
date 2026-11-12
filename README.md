@@ -2,6 +2,14 @@
 
 Firefox extension that shows Richland Library physical holdings, live Libby availability, and Hoopla eBook/eAudiobook availability on Goodreads.
 
+## Project website
+
+The project's public information and installation-instructions page is prepared at [Richland Library on Goodreads](https://adelechase.github.io/richland-goodreads-firefox/), with its source in `docs/`. The page follows the same simple layout as the iPage Quick Links download page.
+
+To enable the website, open this repository's **Settings → Pages**, select **GitHub Actions** as the build and deployment source, then run **Actions → Publish Goodreads extension website → Run workflow**. Later changes to `docs/` publish automatically on `main`.
+
+The website deliberately does not advertise an installable XPI until a Mozilla-signed release exists. The Firefox update feed remains `updates.json` on `raw.githubusercontent.com`, as specified in `manifest.json`; the website does not replace or change that update URL.
+
 ## Baseline and v2.5 behavior
 
 **v2.3 remains the known-good rollback baseline.** v2.5 was rebuilt directly from v2.3 with one functional change: Hoopla eBook and eAudiobook lookups are fully independent jobs. Each format gets its own hidden Firefox tab, polling loop, retry state, timeout, and queue, and one format cannot stop or shorten the other format's search.
