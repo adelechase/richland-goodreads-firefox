@@ -1,7 +1,12 @@
 {
   "addons": {
     "richland-goodreads@local": {
-      "updates": []
+      "updates": [
+        {
+          "version": "2.5.1",
+          "update_link": "https://github.com/adelechase/richland-goodreads-firefox/releases/download/v2.5.1/richland-goodreads-firefox-v2.5.1-signed.xpi"
+        }
+      ]
     }
   }
 }
