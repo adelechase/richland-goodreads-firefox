@@ -4,11 +4,13 @@ Firefox extension that shows Richland Library physical holdings, live Libby avai
 
 ## Project website
 
-The public information and installation page is [Richland Library on Goodreads](https://adelechase.github.io/richland-goodreads-firefox/). Its HTML is maintained in `docs/index.html` and its stylesheet in `docs/styles.css`. The design and instructions follow the iPage Quick Links download page.
+The public information and installation page is [Richland Library on Goodreads](https://adelechase.github.io/richland-goodreads-firefox/). The permanent HTML content is in `site/download-template.html`, and the styling is in `docs/styles.css`. The generated page at `docs/index.html` follows the iPage Quick Links layout. Edit the template, not the generated HTML, when changing the website's instructions or AI disclosure.
 
-GitHub Pages deploys `docs/` using **Actions → Publish Goodreads extension website**. Changes to `docs/` on `main` trigger publication. The website is static and no release script overwrites its copy or styling. When a newer Mozilla-signed extension release is published, update only the version and signed-XPI link in `docs/index.html` as needed; retain the rest of the website's content. The website's CSS is separate from the extension's own root-level `styles.css`.
+The release-page builder (`python3 release.py build-page`) reads the signed versions in `updates.json`, inserts the newest version and its exact signed-XPI download URL into the HTML template, and adds the preceding signed version as a fallback when one exists. It preserves all other HTML content and styling. `python3 release.py check-page` checks that the generated page is current. The script does **not** sign or upload add-ons and never modifies `updates.json` or the extension itself.
 
-The website links to the signed v2.5.1 XPI. The Firefox update feed remains `updates.json` on `raw.githubusercontent.com`, as specified in `manifest.json`; website updates do not replace or change that update URL.
+**You do not need to update the website manually when you publish a new extension release.** After Mozilla signs the XPI and you publish its GitHub Release, add its signed XPI URL to `updates.json` as usual. The **Publish Goodreads extension website** GitHub Actions workflow runs automatically when `updates.json`, the template, the builder, or `docs/` changes on `main`. It builds and tests the page, commits the refreshed `docs/index.html` if necessary, and deploys it to GitHub Pages in the same run. Firefox's update feed remains independent of the website. The website's CSS is separate from the extension's own root-level `styles.css`.
+
+The page currently links to the signed v2.5.1 XPI. The Firefox update feed remains `updates.json` on `raw.githubusercontent.com`, as specified in `manifest.json`; website generation does not change that update URL. Only signed releases listed in the feed appear as download links. Preparing a newer unsigned extension version by itself does not change the public download page.
 
 ## Baseline and v2.5 behavior
 
@@ -58,7 +60,7 @@ Keep older update entries if you want Firefox to choose among versions based on 
 2. Submit the ZIP to addons.mozilla.org using the self-distribution/unlisted workflow.
 3. Download the Mozilla-signed XPI.
 4. Create a GitHub Release for the same version and upload the signed XPI with the filename used by `updates.json`.
-5. Add that version and its GitHub Release URL to `updates.json` and commit the change. Update the signed download link in `docs/index.html` without replacing the site's instructions or styling.
+5. Add that version and its GitHub Release URL to `updates.json` and commit the change. The website workflow automatically rebuilds the download page and preserves its instructions and styling.
 6. Users who already have the extension installed will receive later versions automatically when Firefox checks the update manifest.
 
 ## Temporary development install
