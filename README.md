@@ -4,11 +4,11 @@ Firefox extension that shows Richland Library physical holdings, live Libby avai
 
 ## Project website
 
-The project's public information and installation-instructions page is prepared at [Richland Library on Goodreads](https://adelechase.github.io/richland-goodreads-firefox/), with its source in `docs/`. The page follows the same simple layout as the iPage Quick Links download page.
+The public information and installation page is [Richland Library on Goodreads](https://adelechase.github.io/richland-goodreads-firefox/). Its HTML is maintained in `docs/index.html` and its stylesheet in `docs/styles.css`. The design and instructions follow the iPage Quick Links download page.
 
-To enable the website, open this repository's **Settings → Pages**, select **GitHub Actions** as the build and deployment source, then run **Actions → Publish Goodreads extension website → Run workflow**. Later changes to `docs/` publish automatically on `main`.
+GitHub Pages deploys `docs/` using **Actions → Publish Goodreads extension website**. Changes to `docs/` on `main` trigger publication. The website is static and no release script overwrites its copy or styling. When a newer Mozilla-signed extension release is published, update only the version and signed-XPI link in `docs/index.html` as needed; retain the rest of the website's content. The website's CSS is separate from the extension's own root-level `styles.css`.
 
-The website deliberately does not advertise an installable XPI until a Mozilla-signed release exists. The Firefox update feed remains `updates.json` on `raw.githubusercontent.com`, as specified in `manifest.json`; the website does not replace or change that update URL.
+The website links to the signed v2.5.1 XPI. The Firefox update feed remains `updates.json` on `raw.githubusercontent.com`, as specified in `manifest.json`; website updates do not replace or change that update URL.
 
 ## Baseline and v2.5 behavior
 
@@ -31,7 +31,7 @@ The extension reads the title, author, and, when available, ISBN from Goodreads 
 
 The extension ID is `richland-goodreads@local`. Firefox checks `updates.json` for newer versions.
 
-`updates.json` intentionally starts with an empty `updates` array. Do not advertise a version until Mozilla has signed that exact XPI and the signed XPI has been uploaded to a stable HTTPS URL.
+`updates.json` currently advertises the signed v2.5.1 XPI. Add future versions to the feed only after Mozilla has signed the exact XPI and the signed XPI has been uploaded to a stable HTTPS URL.
 
 For a future signed release, add an entry like:
 
@@ -58,7 +58,7 @@ Keep older update entries if you want Firefox to choose among versions based on 
 2. Submit the ZIP to addons.mozilla.org using the self-distribution/unlisted workflow.
 3. Download the Mozilla-signed XPI.
 4. Create a GitHub Release for the same version and upload the signed XPI with the filename used by `updates.json`.
-5. Add that version and its GitHub Release URL to `updates.json` and commit the change.
+5. Add that version and its GitHub Release URL to `updates.json` and commit the change. Update the signed download link in `docs/index.html` without replacing the site's instructions or styling.
 6. Users who already have the extension installed will receive later versions automatically when Firefox checks the update manifest.
 
 ## Temporary development install
