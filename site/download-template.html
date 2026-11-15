@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Install Richland Library on Goodreads for Firefox and learn how to check Richland Library, Libby, and Hoopla book availability while browsing Goodreads.">
+  <title>Richland Library on Goodreads</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <main id="main-content">
+    <h1>Richland Library on Goodreads</h1>
+    <p>This Firefox extension adds Richland Library availability information directly to Goodreads book pages and book lists. It checks the library's physical collection, Libby, and Hoopla so I can see whether a book is available to borrow without opening three separate searches.</p>
+
+    <h2>How to Install the Richland Library on Goodreads Extension</h2>
+    <ol>
+      <li>Use Firefox 140 or newer, then select the purple installation link below.</li>
+      <li>If Firefox asks you to add the extension, review the permissions and follow the prompts. If the <code>.xpi</code> file downloads instead, open <code>about:addons</code> in Firefox, select the gear menu, choose <strong>Install Add-on From File</strong>, and select the downloaded file.</li>
+      <li>Open or refresh Goodreads to begin using the extension. For Hoopla availability, sign in to Hoopla in the same Firefox browser using your Richland Library account.</li>
+    </ol>
+    <p><a class="install-button" href="{{DOWNLOAD_URL}}">Install version {{VERSION}} for Firefox</a></p>
+    {{FALLBACK_HTML}}
+    <p>Firefox checks for newer signed releases according to its add-on update settings, so you do not need to reinstall the extension after each update.</p>
+
+    <h2>How to Use the Extension</h2>
+    <ol>
+      <li>Open a book's page on Goodreads or browse a Goodreads book list. The extension checks each book it recognizes and adds a <strong>Richland Library</strong> information panel or compact results card.</li>
+      <li>Read the availability information by format. Physical copies can show how many are available and how many holds have been placed. Digital results appear separately for Libby and Hoopla when a match is found.</li>
+      <li>Select a linked format to open its source, or use <strong>View in catalog</strong> to open the corresponding Richland Library catalog search.</li>
+      <li>If Hoopla results are missing, make sure you're signed into Hoopla in Firefox with your Richland Library account, then refresh Goodreads. You do not enter your library card number into the extension.</li>
+    </ol>
+
+    <h2>How Book Information Is Found and Displayed</h2>
+    <h3>Richland Library holdings</h3>
+    <p>The extension searches the Richland Library catalog for a matching book and displays physical formats and copy availability when the catalog provides those counts. It may also show holds. When it cannot retrieve a live count, it indicates that availability was not shown rather than supplying a number.</p>
+
+    <h3>Libby availability</h3>
+    <p>Libby results come from Richland Library's OverDrive collection. Available formats and borrowing status are displayed separately from the physical holdings, with links to the corresponding digital records when available.</p>
+
+    <h3>Hoopla eBooks and eAudiobooks</h3>
+    <p>Hoopla eBook and eAudiobook searches run independently, so one format's search does not stop the other. The extension may briefly open hidden browser tabs to check Hoopla using your existing signed-in session; it closes its temporary tabs after the checks finish or time out.</p>
+
+    <h3>Matching books and interpreting results</h3>
+    <p>The extension reads a book's title and author from Goodreads, along with an ISBN when one is available. It uses this information to search the catalog and digital services. Editions, subtitles, and differences in catalog records can affect matching, so <strong>Not in collection</strong> means the lookup did not find a match, not necessarily that Richland Library has no copy. If a result looks incorrect, double-check the title manually in the library catalog, Libby, or Hoopla.</p>
+
+    <h3>Privacy and permissions</h3>
+    <p>The extension sends book-identifying search information to Richland Library's catalog, OverDrive/Libby, and Hoopla to check availability. It does not ask for or store your library card number or Hoopla password, operate a developer server, use analytics, or intentionally keep a reading history. See the <a href="privacy.html">privacy information</a> for more details about the sites contacted and Firefox permissions.</p>
+
+    <h3>AI Disclosure</h3>
+    <p>I developed this extension and its instructions by working back and forth with ChatGPT (OpenAI), testing the results and making changes along the way. The extension uses JavaScript to look up book information and HTML and CSS to display it on Goodreads. Although AI helped me build it, the extension itself does not use AI when you run it; it checks and displays information from library and digital lending services.</p>
+
+    <details>
+      <summary><strong>Click here to view the readable JavaScript source.</strong></summary>
+      <p>The code is available in the <a href="https://github.com/adelechase/richland-goodreads-firefox">GitHub repository</a>. The main files are <a href="https://github.com/adelechase/richland-goodreads-firefox/blob/main/content.js">content.js</a> (reading Goodreads pages and displaying results), <a href="https://github.com/adelechase/richland-goodreads-firefox/blob/main/background.js">background.js</a> (library and digital availability lookups), and <a href="https://github.com/adelechase/richland-goodreads-firefox/blob/main/styles.css">styles.css</a> (styling the results inside Goodreads).</p>
+    </details>
+  </main>
+</body>
+</html>
